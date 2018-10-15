@@ -1,0 +1,49 @@
+<form  class="emp-form col-md-8" #usuarioForm="ngForm"  (ngSubmit) = "onSubmit(usuarioForm)">
+<div class="form-row ">
+  <div class="form-group col-md-12">
+    <span>CN:</span>
+    <input   name="fcCn" #fcCn="ngModel" #fcCn
+            [(ngModel)]="usuarioService.selectedUsuario.fcCn"
+          placeholder="CN" class="form-control" required/>
+    <div class="validation-error"
+          *ngIf="fcCn.invalid && fcCn.touched">This Field is Required.</div>
+
+  </div>
+
+  <div class="form-group col-md-12">
+    <span>UID:</span>
+    <input   name="fcUid" #fcUid="ngModel" #fcUid
+            [(ngModel)]="usuarioService.selectedUsuario.fcUid"
+            placeholder="UID"
+            class="form-control" required/>
+    <div class="validation-error"
+            *ngIf="fcUid.invalid && fcUid.touched">This Field is Required.</div>
+
+  </div>
+
+  <div class="form-group col-md-12">
+    <span>Correo:</span>
+    <input   name="fcCorreo" #fcCorreo="ngModel"  #fcCorreo
+            [(ngModel)]="usuarioService.selectedUsuario.fcCorreo"
+            placeholder="Correo"
+            class="form-control" required/>
+    <div class="validation-error"
+            *ngIf="fcCorreo.invalid && fcCorreo.touched">This Field is Required.</div>
+
+  </div>
+
+  <div class="form-group col-md-6">
+   <button [disabled]="!usuarioForm.valid"
+          type="submit" class="btn btn-primary">
+          <i class="fa fa-save fa-lg"></i> Guardar
+    </button>
+
+  </div>
+  <div class="form-group col-md-2 ">
+    <button class="btn btn-warning" (click)="resetForm(usuarioForm)">
+        <i class="fa fa-rebel fa-lg"></i> Cancelar
+    </button>
+
+   </div>
+</div>
+</form>
