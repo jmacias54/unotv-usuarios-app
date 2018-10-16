@@ -1,3 +1,51 @@
-<p>
-  usuario-list works!
-</p>
+<div>
+    <div class="row">
+    <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th scope="col">
+              CN
+
+            </th>
+            <th scope="col">
+                UID
+
+              </th>
+            <th class="text-es" scope="col">
+              CORREO
+
+            </th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of itemsInPage">
+            <td>{{usuario.fcCn}}</td>
+            <td>{{usuario.fcUid}}</td>
+            <td>{{usuario.fcCorreo}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+      <div class="row">
+          <div class="table-fotter">
+              <div *ngIf="numberOfPages" class="container-pagination">
+                <span class="label-paginator">Pagina: </span>
+                <ul class="pagination">
+                  <li
+                    class="page-item"
+                    *ngFor="let i of range(1, numberOfPages + 1)"
+                    (click)="showDataPage(i, $event)"
+                    [ngClass]="{'active': i == currentPage}">
+                    <span class="page-link" href="#">{{i}}</span>
+                  </li>
+                </ul>
+              </div>
+          </div>
+      </div>
+
+
+</div>
+
+
+
