@@ -20,21 +20,30 @@ export class UsuarioComponent implements OnInit {
   @Output() openModal: EventEmitter<any> = new EventEmitter();
   @Output() setDisplayForm: EventEmitter<any> = new EventEmitter();
 
-
   operationType: any;
   grupoList:  Array<any> = [];
   grupoSelected: string ;
   selectedUsuario: any ;
   usuarioListComponent: UsuarioListComponent;
+  checkedGroup: Array<any> = [];
 
   constructor( public usuarioService: UsuarioService,
     private grupoService: GrupoService) {
    }
 
+
+
+
   async ngOnInit() {
     this.resetForm();
     this.grupoList = await this.grupoService.getAll().toPromise();
   }
+
+  checkValue(grupo: any) {
+    console.log(grupo);
+
+  }
+
 
   resetForm() {
       this.selectedUsuario = new  Usuario();
@@ -48,7 +57,20 @@ export class UsuarioComponent implements OnInit {
 
   onSubmit(form: NgForm) {
 
+
+    this.checkedGroup = this.grupoList.filter(item => item.checked === true );
+
+    let checkedGroupStr = '';
+    for ( let i = 0 ; i < this.checkedGroup.length ; i ++) {
+            checkedGroupStr = checkedGroupStr + this.checkedGroup[i].fcIdGrupo + ',';
+
+    }
+
+    console.log(checkedGroupStr);
+
+
     const usuario = this.usuarioService.generarUsuario(form);
+    usuario.fcIdGrupo = checkedGroupStr;
 
     if ( this.operationType === 'insertar' ) {
         this.insertar(usuario);
@@ -60,6 +82,7 @@ export class UsuarioComponent implements OnInit {
     form.reset();
 
   }
+
 
 
   insertar (usuario: Usuario) {

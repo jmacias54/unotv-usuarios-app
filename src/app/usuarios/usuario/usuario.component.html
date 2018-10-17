@@ -31,16 +31,20 @@
             *ngIf="fcCorreo.invalid && fcCorreo.touched">This Field is Required.</div>
 
   </div>
+
   <div class="form-group col-md-12">
-  <span>Grupo: </span>
-    <select
-      class="form-control" #fcIdGrupo="ngModel" name="fcIdGrupo"
-      [(ngModel)]="selectedUsuario.fcIdGrupo">
-      <option *ngFor="let grupo of grupoList" [value]="grupo.fcIdGrupo">
-        {{grupo.fcDescripcion}}
-      </option>
-    </select>
-  </div>
+    <label for="options">Grupo:</label>
+
+
+  <li *ngFor="let grupo of grupoList ; let i = index " class="game-item">
+    <input type="checkbox"
+             value="grupo.fcIdGrupo"
+             [(ngModel)]='grupo.checked'
+             name="grupo.checked"
+              />
+    <span class="game-text">{{grupo.fcDescripcion}}</span>
+  </li>
+</div>
 
   <div class="form-group col-md-6">
    <button #btnGuardar [disabled]="!usuarioForm.valid"

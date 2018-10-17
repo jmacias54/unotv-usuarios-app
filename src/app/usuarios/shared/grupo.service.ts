@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class GrupoService {
   // URL to web api
-  private url = '/UNO_MX_WSB_Usuarios/rest/grupoController/';
+  private url = 'https://dev-unotv.tmx-internacional.net/UNO_MX_WSB_Usuarios/rest/grupoController/';
   constructor(private http: HttpClient,
               private messageService: MessageService ) { }
 

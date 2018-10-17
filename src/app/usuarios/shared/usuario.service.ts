@@ -6,7 +6,7 @@ import { MessageService } from '../../message.service';
 import { catchError, map, tap } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
 
-const base = '/UNO_MX_WSB_Usuarios/rest/usuarioController/';
+const base = 'https://dev-unotv.tmx-internacional.net/UNO_MX_WSB_Usuarios/rest/usuarioController/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
