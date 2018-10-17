@@ -6,7 +6,7 @@ import { MessageService } from '../../message.service';
 import { catchError, map, tap } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
 
-const base = 'https://dev-unotv.tmx-internacional.net/UNO_MX_WSB_Usuarios/rest/usuarioController/';
+const base = '/UNO_MX_WSB_Usuarios/rest/usuarioController/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -51,6 +51,13 @@ export class UsuarioService {
 
        return this.http.post<any>(base, httpOptions)
          .pipe(catchError(this.handleError('getAll')));
+   }
+
+public getAllByGrupo (idGrupo: string) {
+    console.log(' --- getAll [ UsuarioService ] --- ');
+
+       return this.http.post<any>(base + 'findAllByGrupo/' + idGrupo + '/' , httpOptions)
+         .pipe(catchError(this.handleError('getAllByGrupo')));
    }
 
 
@@ -105,7 +112,7 @@ export class UsuarioService {
   usuario.fcCn = form.value.fcCn;
   usuario.fcCorreo =  form.value.fcCorreo;
   usuario.fcUid =  form.value.fcUid;
-
+  usuario.fcIdGrupo = form.value.fcIdGrupo;
   return usuario;
 }
 

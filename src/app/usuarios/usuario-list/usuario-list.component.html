@@ -1,36 +1,60 @@
-<div>
-    <div class="row">
-    <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th scope="col">
-              CN
+<div class="col-md-10">
+<div class="row">
+  <div class="form-group select-sport">
+    <label>Seleccione un Grupo: </label>
+    <select (change)="changeGrupo()"
+            class="form-control"
+            [(ngModel)]="grupoSelected">
+           <option [value]="0" >---Seleccione---</option>
+           <option *ngFor="let grupo of grupoList" [value]="grupo.fcIdGrupo">
+             {{grupo.fcDescripcion}}
+            </option>
+    </select>
+  </div>
 
-            </th>
-            <th scope="col">
-                UID
+  </div>
 
-              </th>
-            <th class="text-es" scope="col">
-              CORREO
+    <div class="form-group" >
+     <div class="panel-body">
+          <button type="button" class="btn btn-success "
+            (click)="nuevoUsuario()">
+              <i class="fa fa-plus fa-lg"></i>Nuevo Usuario
+          </button>
+          <table class="table table-bordered table-striped">
+           <thead>
+              <tr>
 
-            </th>
+                  <th  scope="col" >CN </th>
+                  <th  scope="col"  >UID</th>
+                  <th  scope="col" >Correo</th>
+                  <th  scope="col" >Grupo</th>
+                  <th  scope="col" ></th>
+               </tr>
+          </thead>
+           <tbody>
+                <tr *ngFor="let usuario of itemsInPage">
+                    <td>{{usuario.fcCn}}</td>
+                    <td>{{usuario.fcUid}}</td>
+                    <td>{{usuario.fcCorreo}}</td>
+                    <td>{{usuario.fcIdGrupo}}</td>
+                   <td>
+                       <button class="btn btn-primary btn-sm"
+                              (click)="edit(usuario)">
+                              <i class="fa fa-edit fa-lg"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm"
+                                (click)="delete(usuario)">
+                               <i class="fa fa-trash fa-lg"></i>
+                        </button>
+                      </td>
+                 </tr>
+              </tbody>
+            </table>
 
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let usuario of itemsInPage">
-            <td>{{usuario.fcCn}}</td>
-            <td>{{usuario.fcUid}}</td>
-            <td>{{usuario.fcCorreo}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
       <div class="row">
           <div class="table-fotter">
               <div *ngIf="numberOfPages" class="container-pagination">
-                <span class="label-paginator">Pagina: </span>
+                <span class="label-paginator">Pagina:&nbsp; </span>
                 <ul class="pagination">
                   <li
                     class="page-item"
@@ -43,9 +67,48 @@
               </div>
           </div>
       </div>
-
+    </div>
+  </div>
 
 </div>
 
 
+
+
+<div class="backdrop" [ngStyle]="{'display':displayForm}"></div>
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayForm}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+       <div class="modal-body">
+        <app-usuario #modalAppUsuario
+         (onchange)="inicio()"
+         (onCloseHandled)="onCloseHandled()"
+         (setModalText)="setModalText($event)"
+         (openModal)="openModal()"
+         (setDisplayForm)="setDisplayForm($event)" ></app-usuario>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->
+
+
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h6 class="modal-title">Mensaje</h6>
+       </div>
+      <div class="modal-body">
+        <p>{{ modalText }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+                (click)="onCloseHandled()" >Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->
 

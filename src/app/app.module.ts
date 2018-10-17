@@ -7,6 +7,10 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 import { UsuarioListComponent } from './usuarios/usuario-list/usuario-list.component';
 
+import { UsuarioService } from './usuarios/shared/usuario.service';
+import { GrupoService } from './usuarios/shared/grupo.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +23,7 @@ import { UsuarioListComponent } from './usuarios/usuario-list/usuario-list.compo
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ UsuarioService , GrupoService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

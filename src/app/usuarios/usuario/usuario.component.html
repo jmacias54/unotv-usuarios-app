@@ -1,9 +1,9 @@
-<form  class="emp-form col-md-8" #usuarioForm="ngForm"  >
+<form  class="emp-form col-md-12" #usuarioForm="ngForm"  >
 <div class="form-row ">
   <div class="form-group col-md-12">
     <span>CN:</span>
-    <input   name="fcCn" #fcCn="ngModel" #fcCn
-            [(ngModel)]="usuarioService.selectedUsuario.fcCn"
+    <input   name="fcCn" #fcCn="ngModel"
+            [(ngModel)]="selectedUsuario.fcCn"
           placeholder="CN" class="form-control" required/>
     <div class="validation-error"
           *ngIf="fcCn.invalid && fcCn.touched">This Field is Required.</div>
@@ -12,8 +12,8 @@
 
   <div class="form-group col-md-12">
     <span>UID:</span>
-    <input   name="fcUid" #fcUid="ngModel" #fcUid
-            [(ngModel)]="usuarioService.selectedUsuario.fcUid"
+    <input   name="fcUid" #fcUid="ngModel"
+            [(ngModel)]="selectedUsuario.fcUid"
             placeholder="UID"
             class="form-control" required/>
     <div class="validation-error"
@@ -23,24 +23,36 @@
 
   <div class="form-group col-md-12">
     <span>Correo:</span>
-    <input   name="fcCorreo" #fcCorreo="ngModel"  #fcCorreo
-            [(ngModel)]="usuarioService.selectedUsuario.fcCorreo"
+    <input   name="fcCorreo" #fcCorreo="ngModel"
+            [(ngModel)]="selectedUsuario.fcCorreo"
             placeholder="Correo"
             class="form-control" required/>
     <div class="validation-error"
             *ngIf="fcCorreo.invalid && fcCorreo.touched">This Field is Required.</div>
 
   </div>
+  <div class="form-group col-md-12">
+  <span>Grupo: </span>
+    <select
+      class="form-control" #fcIdGrupo="ngModel" name="fcIdGrupo"
+      [(ngModel)]="selectedUsuario.fcIdGrupo">
+      <option *ngFor="let grupo of grupoList" [value]="grupo.fcIdGrupo">
+        {{grupo.fcDescripcion}}
+      </option>
+    </select>
+  </div>
 
   <div class="form-group col-md-6">
-   <button [disabled]="!usuarioForm.valid"
-          class="btn btn-primary" (click) = "onSubmit(usuarioForm)">
+   <button #btnGuardar [disabled]="!usuarioForm.valid"
+          class="btn btn-primary"
+          (click) = "onSubmit(usuarioForm)">
           <i class="fa fa-save fa-lg"></i> Guardar
     </button>
 
   </div>
   <div class="form-group col-md-2 ">
-    <button class="btn btn-warning" (click)="resetForm(usuarioForm)">
+    <button class="btn btn-warning"
+            (click)="resetForm()">
         <i class="fa fa-rebel fa-lg"></i> Cancelar
     </button>
 
